@@ -44,7 +44,7 @@ const resolvers = {
       const checkToken = await verifyAuthToken(token);
 
       if (!checkToken) {
-        return `Your token has expired. Go the the link to resend a new verification email: http://localhost:3427/graphql?query=query{sendVerificationMail(token:"${token}")}`;
+        return `Your token has expired. Go the the link to resend a new verification email: https://fidia-backend-challenge.herokuapp.com/graphql?query=query%7BsendVerificationMail%28token%3A%22${token}%22%29%7D`;
       }
 
       user.emailVerified = true;
@@ -94,7 +94,7 @@ const resolvers = {
         sendMail({
           to: user.email,
           subject: "Verify your Fidia Account!",
-          html: `<p>Hello, <strong>${user.name}.</strong></p><p>Please verify your account by clicking the link: <a href="http://localhost:3427/graphql?query=query{userVerified(token:"${token.token}"email:"${user.email}")}">verify my Fidia account</a> or copy the url below: <p><center>http://localhost:3427/graphql?query=query{userVerified(token:"${token.token}"email:"${user.email}")}</center></p><p>Thank you!</p>`,
+          html: `<p>Hello, <strong>${user.name}.</strong></p><p>Please verify your account by clicking the link: <a href="https://fidia-backend-challenge.herokuapp.com/graphql?query=query%7BuserVerified%28token%3A%22${token.token}%22email%3A%22${user.email}%22%29%7D">verify my Fidia account</a> or copy the url below: <p><center>https://fidia-backend-challenge.herokuapp.com/graphql?query=query%7BuserVerified%28token%3A%22${token.token}%22email%3A%22${user.email}%22%29%7D</center></p><p>Thank you!</p>`,
         });
       });
 
@@ -132,7 +132,7 @@ const resolvers = {
           sendMail({
             to: email,
             subject: "Welcome to Fidia!",
-            html: `<p>Hello, <strong>${name}.</strong></p><p>Welcome to <strong><em>Fidia</em></strong>.<p><h3>We are the best at what we do!</h3></p></p><p>Please verify your account by clicking the link: <a href="http://localhost:3427/graphql?query=query{userVerified(token:"${token.token}"email:"${email}")}">verify my Fidia account</a> or copy the url below: <p><center>http://localhost:3427/graphql?query=query{userVerified(token:"${token.token}"email:"${email}")}</center></p><p>Thank you!</p>`,
+            html: `<p>Hello, <strong>${name}.</strong></p><p>Welcome to <strong><em>Fidia</em></strong>.<p><h3>We are the best at what we do!</h3></p></p><p>Please verify your account by clicking the link: <a href="https://fidia-backend-challenge.herokuapp.com/graphql?query=query%7BuserVerified%28token%3A%22${token.token}%22email%3A%22${user.email}%22%29%7D">verify my Fidia account</a> or copy the url below: <p><center>https://fidia-backend-challenge.herokuapp.com/graphql?query=query%7BuserVerified%28token%3A%22${token.token}%22email%3A%22${user.email}%22%29%7D</center></p><p>Thank you!</p>`,
           });
         });
         return user;
@@ -213,7 +213,7 @@ const resolvers = {
         sendMail({
           to: user.email,
           subject: "Verify your Fidia Account!",
-          html: `<p>Hello, <strong>${user.name}.</strong></p><p>Please verify your account by clicking the link: <a href="http://localhost:3427/graphql?query=query{userVerified(token:"${token.token}"email:"${user.email}")}">verify my Fidia account</a> or copy the url below: <p><center>http://localhost:3427/graphql?query=query{userVerified(token:"${token.token}"email:"${user.email}")}</center></p><p>Thank you!</p>`,
+          html: `<p>Hello, <strong>${user.name}.</strong></p><p>Please verify your account by clicking the link: <a href="https://fidia-backend-challenge.herokuapp.com/graphql?query=query%7BuserVerified%28token%3A%22${token.token}%22email%3A%22${user.email}%22%29%7D">verify my Fidia account</a> or copy the url below: <p><center>https://fidia-backend-challenge.herokuapp.com/graphql?query=query%7BuserVerified%28token%3A%22${token.token}%22email%3A%22${user.email}%22%29%7D</center></p><p>Thank you!</p>`,
         });
       });
 
