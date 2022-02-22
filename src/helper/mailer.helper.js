@@ -5,7 +5,7 @@ config();
 
 const transporter = createTransport({
   port: 465,
-  host: "smtp.gmail.com",
+  host: process.env.EMAIL_HOST,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
@@ -23,7 +23,6 @@ export const sendMail = ({ to, subject, html }) => {
   transporter.sendMail(mailInfo, (error, info) => {
     if (error) {
       console.log("Email could not be sent at the moment.");
-      console.log(error);
     }
     return "Email sent successfully.";
   });
