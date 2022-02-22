@@ -3,8 +3,8 @@ import express from "express";
 import cors from "cors";
 import connectToDB from "./config/database.config";
 import { ApolloServer } from "apollo-server-express";
-import typeDefs from "./graphql/typeDefs.graphql";
-import resolvers from "./graphql/resolvers.graphql";
+import typeDefs from "./graphql/user/typeDefs.graphql.user";
+import resolvers from "./graphql/user/resolvers.graphql.user";
 
 config();
 
