@@ -1,9 +1,15 @@
-import User from "../../model/user.model";
-import Token from "../../model/token.model";
-import { generateAuthToken } from "../../helper/auth.helper";
-import { verifyAuthToken } from "../../middleware/auth.middleware";
-import { sendMail } from "../../helper/mailer.helper";
 import bcrypt from "bcrypt";
+import {
+  UserInputError,
+  AuthenticationError,
+  ValidationError,
+  ForbiddenError,
+} from "apollo-server";
+import User from "../../model/user.model.js";
+import Token from "../../model/token.model.js";
+import { generateAuthToken } from "../../helper/auth.helper.js";
+import { verifyAuthToken } from "../../middleware/auth.middleware.js";
+import { sendMail } from "../../helper/mailer.helper.js";
 
 const resolvers = {
   Query: {
@@ -17,7 +23,7 @@ const resolvers = {
       const verifyToken = await Token.findOne({ token });
 
       if (!verifyToken) {
-        throw new Error("Invalid token.");
+        throw new ValidationError("Invalid token.");
       }
 
       const user = await User.findOne({
@@ -26,7 +32,7 @@ const resolvers = {
       });
 
       if (!user) {
-        throw new Error(
+        throw new ValidationError(
           "We were unable to find a user for this link. Please signup."
         );
       }
@@ -52,7 +58,7 @@ const resolvers = {
       const verifyToken = await Token.findOne({ token });
 
       if (!verifyToken) {
-        throw new Error("Invalid token.");
+        throw new ValidationError("Invalid token.");
       }
 
       const user = await User.findOne({
@@ -60,7 +66,7 @@ const resolvers = {
       });
 
       if (!user) {
-        throw new Error(
+        throw new ValidationError(
           "We were unable to find a user for this link. Please signup."
         );
       }
@@ -102,7 +108,7 @@ const resolvers = {
       const user = await User.findOne({ email });
 
       if (user) {
-        throw new Error("User already exists");
+        throw new ForbiddenError("User already exists");
       }
 
       try {
@@ -131,7 +137,9 @@ const resolvers = {
         });
         return user;
       } catch (error) {
-        throw new Error("User could not be created. Please try again later.");
+        throw new ValidationError(
+          "User could not be created. Please try again later."
+        );
       }
     },
     verifyUser: async (parent, args, context, info) => {
@@ -140,7 +148,7 @@ const resolvers = {
       const verifyToken = await Token.findOne({ token });
 
       if (!verifyToken) {
-        throw new Error("Invalid token.");
+        throw new ValidationError("Invalid token.");
       }
 
       const user = await User.findOne({
@@ -149,7 +157,7 @@ const resolvers = {
       });
 
       if (!user) {
-        throw new Error(
+        throw new ValidationError(
           "We were unable to find a user for this link. Please signup."
         );
       }
@@ -169,7 +177,7 @@ const resolvers = {
       const verifyToken = await Token.findOne({ token });
 
       if (!verifyToken) {
-        throw new Error("Invalid token.");
+        throw new ValidationError("Invalid token.");
       }
 
       const user = await User.findOne({
@@ -177,7 +185,7 @@ const resolvers = {
       });
 
       if (!user) {
-        throw new Error(
+        throw new ValidationError(
           "We were unable to find a user for this link. Please signup."
         );
       }
@@ -217,11 +225,11 @@ const resolvers = {
       const user = await User.findOne({ email: email });
 
       if (!user) {
-        throw new Error("Email or password is incorrect.");
+        throw new UserInputError("Email or password is incorrect.");
       }
 
       if (!user.emailVerified) {
-        throw new Error(
+        throw new AuthenticationError(
           "Email is not verified. Please check your email to verify your account."
         );
       }
@@ -229,7 +237,7 @@ const resolvers = {
       const validatePassword = bcrypt.compareSync(password, user.password);
 
       if (!validatePassword) {
-        throw new Error("Email or password is incorrect.");
+        throw new AuthenticationError("Email or password is incorrect.");
       }
 
       const token = generateAuthToken({
