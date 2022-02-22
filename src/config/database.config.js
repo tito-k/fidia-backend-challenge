@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { seedUser } from "../../seeder/user.seeder.js";
+import { seedUser } from "../../seeder/user.seeder.js"
 
 const connectToDB = async () => {
   try {
@@ -10,7 +10,7 @@ const connectToDB = async () => {
 
     console.log("Connected to database...");
 
-    if (process.env.NODE_ENV !== "prod") {
+    if (process.env.NODE_ENV !== 'production') {
       await seedUser();
     }
   } catch (error) {
