@@ -1,0 +1,21 @@
+import mongoose from "mongoose";
+import { seedUser } from "../../seeder/user.seeder.js";
+
+const connectToDB = async () => {
+  try {
+    mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+
+    console.log("Connected to database...");
+
+    if (process.env.NODE_ENV !== "prod") {
+      await seedUser();
+    }
+  } catch (error) {
+    console.log(`Could not connect to database ${error}`);
+  }
+};
+
+export default connectToDB;
