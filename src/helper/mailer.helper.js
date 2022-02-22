@@ -22,7 +22,8 @@ export const sendMail = ({ to, subject, html }) => {
   };
   transporter.sendMail(mailInfo, (error, info) => {
     if (error) {
-      return "Email could not be sent. Please try again.";
+      console.log("Email could not be sent at the moment.");
+      console.log(error);
     }
     return "Email sent successfully.";
   });
