@@ -1,10 +1,10 @@
 import { config } from "dotenv";
 import express from "express";
 import cors from "cors";
-import connectToDB from "./config/database.config";
+import connectToDB from "./config/database.config.js";
 import { ApolloServer } from "apollo-server-express";
-import typeDefs from "./graphql/user/typeDefs.graphql.user";
-import resolvers from "./graphql/user/resolvers.graphql.user";
+import typeDefs from "./graphql/user/typeDefs.graphql.user.js";
+import resolvers from "./graphql/user/resolvers.graphql.user.js";
 
 config();
 
@@ -34,3 +34,5 @@ app.listen(PORT, () =>
     `server running on http://localhost:${PORT} in ${process.env.NODE_ENV} mode.\npress CTRL-C to stop`
   )
 );
+
+export default app;

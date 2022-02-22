@@ -1,4 +1,4 @@
-import User from "../src/model/user.model"
+import User from "../src/model/user.model.js"
 
 const users = [
   new User({
