@@ -4,7 +4,7 @@ import { createTransport } from "nodemailer";
 config();
 
 const transporter = createTransport({
-  port: 465,
+  port: process.env.EMAIL_PORT,
   host: process.env.EMAIL_HOST,
   auth: {
     user: process.env.EMAIL_USER,
