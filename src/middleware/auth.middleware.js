@@ -1,10 +1,12 @@
 import jwt from "jsonwebtoken";
 
 export async function verifyAuthToken(token) {
+  let result;
   jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
     if (error) {
-      return null;
+      result = null;
     }
-    return decoded;
+    result = decoded;
   });
+  return result;
 }
